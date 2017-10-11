@@ -1,0 +1,3 @@
+defmodule ElixirPreCommit do
+
+end

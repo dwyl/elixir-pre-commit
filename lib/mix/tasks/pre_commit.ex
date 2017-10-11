@@ -7,7 +7,7 @@ defmodule Mix.Tasks.PreCommit do
     @commands
     |> Enum.map(&run_cmds/1)
 
-    IO.puts "\e[1mPre-commit passed!\e[0m"
+    IO.puts "\e[32mPre-commit passed!\e[0m"
     System.halt(0)
   end
 

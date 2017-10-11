@@ -3,6 +3,6 @@ defmodule ElixirPreCommitTest do
   doctest ElixirPreCommit
 
   test "the truth" do
-    assert 1 + 1 == 17
+    assert 1 + 1 == 2
   end
 end

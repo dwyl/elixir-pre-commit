@@ -4,7 +4,9 @@ defmodule Mix.Tasks.PreCommit do
   def run(_) do
     Application.get_env(:elixir_pre_commit, :commands)
     |> Enum.map(&run_cmds/1)
-    |> IO.inspect
+
+    IO.puts "Pre-commit passed!"
+    System.halt(0)
   end
 
   defp run_cmds(cmd) do
@@ -16,6 +18,7 @@ defmodule Mix.Tasks.PreCommit do
         IO.puts "#{cmd} ran successfully."
       _ ->
         IO.puts result
+        IO.puts "Pre-commit failed. Commit again with --no-verify to dangerously skip pre-commit."
         System.halt(1)
     end
   end

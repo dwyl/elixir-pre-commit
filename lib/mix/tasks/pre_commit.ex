@@ -1,24 +1,24 @@
 defmodule Mix.Tasks.PreCommit do
   use Mix.Task
 
+  @commands Application.get_env(:elixir_pre_commit, :commands) || ["test"]
+
   def run(_) do
-    Application.get_env(:elixir_pre_commit, :commands)
+    @commands
     |> Enum.map(&run_cmds/1)
 
-    IO.puts "Pre-commit passed!"
+    IO.puts "\e[1mPre-commit passed!\e[0m"
     System.halt(0)
   end
 
   defp run_cmds(cmd) do
-    {result, code} =
-      System.cmd("mix", [cmd], stderr_to_stdout: true)
-
-    case code do
-      0 ->
-        IO.puts "#{cmd} ran successfully."
-      _ ->
+    System.cmd("mix", [cmd], stderr_to_stdout: true)
+    |> case do
+      {_result, 0} ->
+        IO.puts "mix #{cmd} ran successfully."
+      {result, _} ->
         IO.puts result
-        IO.puts "Pre-commit failed. Commit again with --no-verify to dangerously skip pre-commit."
+        IO.puts "\e[31mPre-commit failed on `mix #{cmd}`.\e[0m \nCommit again with --no-verify to live dangerously and skip pre-commit."
         System.halt(1)
     end
   end

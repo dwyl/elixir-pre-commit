@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.PreCommit do
   use Mix.Task
 
-  @commands Application.get_env(:elixir_pre_commit, :commands) || ["test"]
+  @commands Application.get_env(:elixir_pre_commit, :commands) || []
 
   def run(_) do
     @commands

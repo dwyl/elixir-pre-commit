@@ -1,0 +1,133 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.17.1">
+    <title>ElixirPreCommit – elixir_pre_commit v0.1.0</title>
+    <link rel="stylesheet" href="dist/app-110d9134a6.css" />
+    
+    
+    <script src="dist/sidebar_items-d4810a81b0.js"></script>
+    
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        elixir_pre_commit
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.1.0
+      </h2>
+    </div>
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+      <li><a id="tasks-list" href="#full-list">Mix Tasks</a></li>
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">elixir_pre_commit v0.1.0</small>
+        ElixirPreCommit
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>This is a module for setting up pre-commit hooks on elixir projects. It’s
+inspired by <a href="https://www.npmjs.com/package/pre-commit">pre-commit</a> on npm
+and <a href="https://hex.pm/packages/pre_commit_hook">pre_commit_hook</a> for Elixir.</p>
+<h3 id="module-this-module-will-overwrite-your-current-pre-commit-hooks" class="section-heading">
+  <a href="#module-this-module-will-overwrite-your-current-pre-commit-hooks" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  THIS MODULE WILL OVERWRITE YOUR CURRENT PRE-COMMIT HOOKS
+</h3>
+
+<p>We wanted something which was configurable with your own mix commands and
+just in elixir, so we created our own module.</p>
+<p>The first step will be to add this module to your mix.exs.</p>
+<pre><code class="elixir">def deps do
+  [{:elixir_pre_commit, &quot;~&gt; 0.1.0&quot;, only: :dev}]
+end</code></pre>
+<p>Then run mix deps.get. When the module is installed it will either create or overwrite your current <code class="inline">pre-commit</code> file in your <code class="inline">.git/hooks</code> directory.</p>
+<p>In your config file you will have to add in this line:</p>
+<pre><code class="elixir">  config :elixir_pre_commit, commands: [&quot;test&quot;]</code></pre>
+<p>You can add any mix commands to the list, and these will run on commit,
+stopping the commit if they fail, or allowing the commit if they all pass.</p>
+<p>As a note, this module will only work with scripts which exit with a code of
+<code class="inline">1</code> on error, and a code of <code class="inline">0</code> on success. Some commands always exit with a
+<code class="inline">0</code> (success), so just make sure the command uses the right format before
+putting it in your pre-commit.</p>
+<p>We like adding <a href="https://github.com/rrrene/credo">credo</a> and
+<a href="https://github.com/parroty/excoveralls">coveralls</a> as well as <code class="inline">test</code>, to
+keep our code consistent and well covered!</p>
+
+        </section>
+      
+
+      
+
+      
+
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.17.1),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-4cfb39be16.js"></script>
+  
+  </body>
+</html>
+

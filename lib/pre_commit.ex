@@ -12,7 +12,7 @@ defmodule PreCommit do
   The first step will be to add this module to your mix.exs.
   ```elixir
   def deps do
-    [{:pre_commit, "~> 0.1.0", only: :dev}]
+    [{:pre_commit, "~> 0.1.3", only: :dev}]
   end
   ```
   Then run mix deps.get. When the module is installed it will either create or overwrite your current `pre-commit` file in your `.git/hooks` directory.
@@ -24,6 +24,8 @@ defmodule PreCommit do
   You can add any mix commands to the list, and these will run on commit,
   stopping the commit if they fail, or allowing the commit if they all pass.
 
+  You will have to compile your app before committing in order for the pre-commit to work.
+
   As a note, this module will only work with scripts which exit with a code of
   `1` on error, and a code of `0` on success. Some commands always exit with a
   `0` (success), so just make sure the command uses the right format before
@@ -33,9 +35,12 @@ defmodule PreCommit do
   [coveralls](https://github.com/parroty/excoveralls) as well as `test`, to
   keep our code consistent and well covered!
   """
-  copy = Mix.Project.deps_path() |> Path.join("../priv/pre-commit")
+  copy = Mix.Project.deps_path() |> Path.join("pre_commit/priv/pre-commit")
   to = Mix.Project.deps_path() |> Path.join("../.git/hooks/pre-commit")
 
-  File.copy(copy, to)
-  File.chmod(to, 0o755)
+  copy
+  |> File.copy(to)
+
+  to
+  |> File.chmod(0o755)
 end

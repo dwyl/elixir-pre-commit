@@ -1,1 +1,0 @@
-sidebarNodes={"extras":[{"id":"api-reference","title":"API Reference","group":"","headers":[{"id":"Modules","anchor":"modules"},{"id":"Mix Tasks","anchor":"mix-tasks"}]}],"exceptions":[],"modules":[{"id":"ElixirPreCommit","title":"ElixirPreCommit","group":""}],"tasks":[{"id":"Mix.Tasks.PreCommit","title":"pre_commit","group":"","functions":[{"id":"run/1","anchor":"run/1"}]}]}

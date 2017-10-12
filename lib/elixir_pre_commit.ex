@@ -1,4 +1,4 @@
-defmodule ElixirPreCommit do
+defmodule PreCommit do
   @moduledoc """
   This is a module for setting up pre-commit hooks on elixir projects. It's
   inspired by [pre-commit](https://www.npmjs.com/package/pre-commit) on npm
@@ -12,14 +12,14 @@ defmodule ElixirPreCommit do
   The first step will be to add this module to your mix.exs.
   ```elixir
   def deps do
-    [{:elixir_pre_commit, "~> 0.1.0", only: :dev}]
+    [{:pre_commit, "~> 0.1.0", only: :dev}]
   end
   ```
   Then run mix deps.get. When the module is installed it will either create or overwrite your current `pre-commit` file in your `.git/hooks` directory.
 
   In your config file you will have to add in this line:
   ```elixir
-    config :elixir_pre_commit, commands: ["test"]
+    config :pre_commit, commands: ["test"]
   ```
   You can add any mix commands to the list, and these will run on commit,
   stopping the commit if they fail, or allowing the commit if they all pass.

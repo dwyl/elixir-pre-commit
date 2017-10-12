@@ -9,7 +9,7 @@ defmodule Mix.Tasks.PreCommit do
     meaning that the command has failed), which will trigger the commit to stop,
     and print the error message to the terminal.
   """
-  @commands Application.get_env(:pre_commit, :commands) || ["test"]
+  @commands Application.get_env(:pre_commit, :commands) || []
 
 
   def run(_) do
@@ -24,7 +24,7 @@ defmodule Mix.Tasks.PreCommit do
 
 
   defp run_cmds(cmd) do
-    System.cmd("mix", [cmd], stderr_to_stdout: true)
+    System.cmd("mix", String.split(cmd, " "), stderr_to_stdout: true)
     |> case do
       {_result, 0} ->
         IO.puts "mix #{cmd} ran successfully."

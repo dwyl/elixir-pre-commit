@@ -9,7 +9,7 @@ defmodule Mix.Tasks.PreCommit do
     meaning that the command has failed), which will trigger the commit to stop,
     and print the error message to the terminal.
   """
-  @commands Application.get_env(:elixir_pre_commit, :commands) || ["test"]
+  @commands Application.get_env(:pre_commit, :commands) || ["test"]
 
 
   def run(_) do

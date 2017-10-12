@@ -1,8 +1,8 @@
-defmodule ElixirPreCommit.Mixfile do
+defmodule PreCommit.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :elixir_pre_commit,
+    [app: :pre_commit,
      version: "0.1.0",
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,

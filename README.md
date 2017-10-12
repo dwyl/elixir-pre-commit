@@ -1,19 +1,35 @@
 # ElixirPreCommit
 
-**TODO: Add description**
+### THIS MODULE WILL OVERWRITE YOUR CURRENT PRE-COMMIT HOOKS
 
-## Installation
+This is a module for setting up pre-commit hooks on elixir projects. It's
+inspired by [pre-commit](https://www.npmjs.com/package/pre-commit) on npm
+and [pre_commit_hook](https://hex.pm/packages/pre_commit_hook) for Elixir.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `elixir_pre_commit` to your list of dependencies in `mix.exs`:
 
+We wanted something which was configurable with your own mix commands and
+just in elixir, so we created our own module.
+
+The first step will be to add this module to your mix.exs.
 ```elixir
 def deps do
-  [{:elixir_pre_commit, "~> 0.1.0"}]
+  [{:elixir_pre_commit, "~> 0.1.0", only: :dev}]
 end
 ```
+Then run mix deps.get. When the module is installed it will either create or overwrite your current `pre-commit` file in your `.git/hooks` directory.
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/elixir_pre_commit](https://hexdocs.pm/elixir_pre_commit).
+In your config file you will have to add in this line:
+```elixir
+  config :elixir_pre_commit, commands: ["test"]
+```
+You can add any mix commands to the list, and these will run on commit,
+stopping the commit if they fail, or allowing the commit if they all pass.
 
+As a note, this module will only work with scripts which exit with a code of
+`1` on error, and a code of `0` on success. Some commands always exit with a
+`0` (success), so just make sure the command uses the right format before
+putting it in your pre-commit.
+
+We like adding [credo](https://github.com/rrrene/credo) and
+[coveralls](https://github.com/parroty/excoveralls) as well as `test`, to
+keep our code consistent and well covered!

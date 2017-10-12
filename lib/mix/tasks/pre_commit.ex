@@ -1,6 +1,14 @@
 defmodule Mix.Tasks.PreCommit do
   use Mix.Task
+  @moduledoc """
+    This file contains the functions that will be run when `mix pre_commit` is
+    run. (we run it in the script in the `pre-commit` file in your `.git/hooks` directory but you can run it yourself if you want to see the output without committing).
 
+    In here we just run all of the mix commands that you have put in your config file, and if they're succesful, print a success message to the
+    the terminal, and if they fail we halt the process with a `1` error code (
+    meaning that the command has failed), which will trigger the commit to stop,
+    and print the error message to the terminal.
+  """
   @commands Application.get_env(:elixir_pre_commit, :commands) || []
 
   def run(_) do
@@ -10,6 +18,7 @@ defmodule Mix.Tasks.PreCommit do
     IO.puts "\e[32mPre-commit passed!\e[0m"
     System.halt(0)
   end
+
 
   defp run_cmds(cmd) do
     System.cmd("mix", [cmd], stderr_to_stdout: true)

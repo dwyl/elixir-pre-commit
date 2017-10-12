@@ -1,0 +1,8 @@
+#!/bin/sh
+
+mix pre_commit
+RES=$?
+if [ $RES -ne 0  ]
+then
+  exit $RES
+fi

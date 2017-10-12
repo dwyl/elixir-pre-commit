@@ -13,6 +13,8 @@ defmodule Mix.Tasks.PreCommit do
 
 
   def run(_) do
+    IO.puts "\e[95mPre-commit running...\e[0m"
+
     @commands
     |> Enum.each(&run_cmds/1)
 

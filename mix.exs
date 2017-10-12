@@ -22,7 +22,9 @@ defmodule ElixirPreCommit.Mixfile do
   end
 
   defp deps do
-    []
+    [
+      {:ex_doc, "~> 0.13", only: :dev}
+    ]
   end
 
   defp description do

@@ -13,7 +13,7 @@ just in elixir, so we created our own module.
 The first step will be to add this module to your mix.exs.
 ```elixir
 def deps do
-  [{:pre_commit, "~> 0.1.3", only: :dev}]
+  [{:pre_commit, "~> 0.1.4", only: :dev}]
 end
 ```
 Then run mix deps.get. When the module is installed it will either create or overwrite your current `pre-commit` file in your `.git/hooks` directory.

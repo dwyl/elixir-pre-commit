@@ -24,6 +24,14 @@ defmodule PreCommit do
   You can add any mix commands to the list, and these will run on commit,
   stopping the commit if they fail, or allowing the commit if they all pass.
 
+  You can also have pre-commit display the output of the commands you run by
+  setting the :verbose option.
+  ```
+  config :pre_commit,
+  commands: ["test"],
+  verbose: true
+  ```
+
   You will have to compile your app before committing in order for the pre-commit to work.
 
   As a note, this module will only work with scripts which exit with a code of

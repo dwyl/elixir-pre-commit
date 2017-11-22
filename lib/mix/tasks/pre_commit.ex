@@ -10,6 +10,7 @@ defmodule Mix.Tasks.PreCommit do
     and print the error message to the terminal.
   """
   @commands Application.get_env(:pre_commit, :commands) || []
+  @verbose Application.get_env(:pre_commit, :verbose) || false
 
 
   def run(_) do
@@ -24,7 +25,12 @@ defmodule Mix.Tasks.PreCommit do
 
 
   defp run_cmds(cmd) do
-    System.cmd("mix", String.split(cmd, " "), stderr_to_stdout: true)
+    into = case @verbose do
+      true -> IO.stream(:stdio, :line)
+      _    -> ""
+    end
+
+    System.cmd("mix", String.split(cmd, " "), stderr_to_stdout: true, into: into)
     |> case do
       {_result, 0} ->
         IO.puts "mix #{cmd} ran successfully."

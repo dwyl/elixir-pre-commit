@@ -35,7 +35,7 @@ defmodule Mix.Tasks.PreCommit do
       {_result, 0} ->
         IO.puts "mix #{cmd} ran successfully."
       {result, _} ->
-        IO.puts result
+        if !@verbose, do: IO.puts result
         IO.puts "\e[31mPre-commit failed on `mix #{cmd}`.\e[0m \nCommit again with --no-verify to live dangerously and skip pre-commit."
         System.halt(1)
     end

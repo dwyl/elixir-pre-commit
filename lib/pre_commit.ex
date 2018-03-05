@@ -47,7 +47,7 @@ defmodule PreCommit do
   to = Mix.Project.deps_path() |> Path.join("../.git/hooks/pre-commit")
 
   unless File.exists?(to) do
-    File.mkdir!(to)
+    File.mkdir_p!(to)
   end
 
   copy

@@ -3,7 +3,7 @@ defmodule PreCommit.Mixfile do
 
   def project do
     [app: :pre_commit,
-     version: "0.2.4",
+     version: "0.3.4",
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,

@@ -15,10 +15,12 @@ defmodule Mix.Tasks.PreCommit do
 
   def run(_) do
     IO.puts "\e[95mPre-commit running...\e[0m"
+    {_, 0} = System.cmd("git", String.split("stash push --keep-index --message pre_commit", " "))
 
     @commands
     |> Enum.each(&run_cmds/1)
 
+    {_, 0} = System.cmd("git", String.split("stash pop", " "))
     IO.puts "\e[32mPre-commit passed!\e[0m"
     System.halt(0)
   end
@@ -37,6 +39,7 @@ defmodule Mix.Tasks.PreCommit do
       {result, _} ->
         if !@verbose, do: IO.puts result
         IO.puts "\e[31mPre-commit failed on `mix #{cmd}`.\e[0m \nCommit again with --no-verify to live dangerously and skip pre-commit."
+        {_, 0} = System.cmd("git", String.split("stash pop", " "))
         System.halt(1)
     end
   end

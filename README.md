@@ -7,7 +7,8 @@ inspired by [pre-commit](https://www.npmjs.com/package/pre-commit) on npm and
 [pre_commit_hook](https://hex.pm/packages/pre_commit_hook) for Elixir.
 
 We wanted something which was configurable with your own mix commands and just
-in Elixir, so we created our own module.
+in Elixir, so we created our own module. This module will only work with git
+versions 2.13 and above.
 
 The first step will be to add this module to your mix.exs.
 
@@ -49,3 +50,7 @@ in your pre-commit.
 We like adding [credo](https://github.com/rrrene/credo) and
 [coveralls](https://github.com/parroty/excoveralls) as well as `test`, to keep
 our code consistent and well covered!
+
+There is a [known issue](https://github.com/dwyl/elixir-pre-commit/issues/32)
+with the fact that running the pre-commit will restore deleted files to the working
+tree.

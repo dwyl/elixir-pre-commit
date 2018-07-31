@@ -7,7 +7,8 @@ defmodule PreCommit do
   ### THIS MODULE WILL OVERWRITE YOUR CURRENT PRE-COMMIT HOOKS
 
   We wanted something which was configurable with your own mix commands and
-  just in elixir, so we created our own module.
+  just in elixir, so we created our own module. This module will only work 
+  with git versions 2.13 and above.
 
   The first step will be to add this module to your mix.exs.
   ```elixir
@@ -42,6 +43,10 @@ defmodule PreCommit do
   We like adding [credo](https://github.com/rrrene/credo) and
   [coveralls](https://github.com/parroty/excoveralls) as well as `test`, to
   keep our code consistent and well covered!
+
+  There is a [known issue](https://github.com/dwyl/elixir-pre-commit/issues/32)
+  with the fact that running the pre-commit will restore deleted files to the working
+  tree.
   """
   copy = Mix.Project.deps_path() |> Path.join("pre_commit/priv/pre-commit")
   to = Mix.Project.deps_path() |> Path.join("../.git/hooks/pre-commit")

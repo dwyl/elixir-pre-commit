@@ -1,6 +1,8 @@
 #!/bin/sh
 
-mix pre_commit
-[ $? -ne 0 ] && exit 1
+if ! mix pre_commit 
+then
+    exit 1
+fi 
+
 exit 0
-fi

@@ -1,8 +1,8 @@
-defmodule PreCommit.Mixfile do
+defmodule CommitMsg.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :pre_commit,
+    [app: :commit_msg,
      version: "0.3.4",
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
@@ -23,21 +23,22 @@ defmodule PreCommit.Mixfile do
 
   defp deps do
     [
-      {:ex_doc, "~> 0.13", only: :dev}
+      {:ex_doc, "~> 0.13", only: :dev},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
 
   defp description do
-    "A module which sets up a configurable pre-commit hook using elixir."
+    "A module which sets up a configurable commit-msg hook using elixir."
   end
 
   defp package do
     [
       name: "pre_commit",
       files: ["lib/", "priv/", "LICENSE", "mix.exs", "README.md"],
-      links: %{"Github" => "https://www.github.com/dwyl/elixir-pre-commit"},
+      links: %{"Github" => "https://www.github.com/Odovren/elixir-commit-message"},
       licenses: ["GNU GPL v2.0"],
-      maintainers: ["Zooey Miller", "Finn Hodgkin"]
+      maintainers: ["Odovren"]
     ]
 
   end

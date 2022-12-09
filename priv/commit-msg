@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if ! mix pre_commit 
+if ! mix commit_msg 
 then
     exit 1
 fi 

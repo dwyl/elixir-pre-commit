@@ -1,6 +1,6 @@
-defmodule PreCommitTest do
+defmodule CommitMsgTest do
   use ExUnit.Case
-  doctest PreCommit
+  doctest CommitMsg
 
   test "the truth" do
     assert 1 + 1 == 2

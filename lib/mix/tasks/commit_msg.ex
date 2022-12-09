@@ -1,21 +1,21 @@
-defmodule Mix.Tasks.PreCommit do
+defmodule Mix.Tasks.CommitMsg do
   use Mix.Task
 
   @moduledoc """
-    This file contains the functions that will be run when `mix pre_commit` is
-    run. (we run it in the script in the `pre-commit` file in your `.git/hooks` directory but you can run it yourself if you want to see the output without committing).
+    This file contains the functions that will be run when `mix commit_msg` is
+    run. (we run it in the script in the `commit-msg` file in your `.git/hooks` directory)
 
     In here we just run all of the mix commands that you have put in your config file, and if they're succesful, print a success message to the
     the terminal, and if they fail we halt the process with a `1` error code (
     meaning that the command has failed), which will trigger the commit to stop,
     and print the error message to the terminal.
   """
-  @commands Application.get_env(:pre_commit, :commands) || []
-  @verbose Application.get_env(:pre_commit, :verbose) || false
+  @commands Application.compile_env(:commit_msg, :commands) || []
+  @verbose Application.compile_env(:commit_msg, :verbose) || false
 
   def run(_) do
-    IO.puts("\e[95mPre-commit running...\e[0m")
-    {_, 0} = System.cmd("git", String.split("stash push --keep-index --message pre_commit", " "))
+    IO.puts("\e[95mCommit-msg running...\e[0m")
+    {_, 0} = System.cmd("git", String.split("stash push --keep-index --message commit_msg", " "))
 
     @commands
     |> Enum.each(&run_cmds/1)
@@ -23,10 +23,10 @@ defmodule Mix.Tasks.PreCommit do
     System.cmd("git", String.split("stash pop", " "), stderr_to_stdout: true)
     |> case do
       {_, 0} ->
-        "\e[32mPre-commit passed!\e[0m"
+        "\e[32mCommit-msg passed!\e[0m"
 
       {"No stash entries found.", 1} ->
-        "\e[32mPre-commit passed!\e[0m"
+        "\e[32mCommit-msg passed!\e[0m"
 
       {error, _} ->
         error
@@ -52,7 +52,7 @@ defmodule Mix.Tasks.PreCommit do
         if !@verbose, do: IO.puts(result)
 
         IO.puts(
-          "\e[31mPre-commit failed on `mix #{cmd}`.\e[0m \nCommit again with --no-verify to live dangerously and skip pre-commit."
+          "\e[31mCommit-msg failed on `mix #{cmd}`.\e[0m \nCommit again with --no-verify to live dangerously and skip commit-msg."
         )
 
         {_, 0} = System.cmd("git", String.split("stash pop", " "))
